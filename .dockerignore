@@ -1,0 +1,9 @@
+node_modules
+npm-debug.log*
+.git
+.gitignore
+Research
+*.md
+*.postman_collection.json
+vercel.json
+.vercel

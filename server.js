@@ -391,14 +391,12 @@ app.use((err, _req, res, _next) => {
 });
 
 // ---------------------------------------------------------------------------
-// Start (local dev only – Vercel uses the module export)
+// Start
 // ---------------------------------------------------------------------------
-if (require.main === module) {
-  app.listen(PORT, () => {
-    console.log(`StarMaker upload proxy running on http://localhost:${PORT}`);
-    console.log(`  POST /api/login   – Login to StarMaker`);
-    console.log(`  POST /api/upload  – Upload a song (full pipeline)`);
-  });
-}
+app.listen(PORT, () => {
+  console.log(`StarMaker upload proxy running on http://localhost:${PORT}`);
+  console.log(`  POST /api/login   – Login to StarMaker`);
+  console.log(`  POST /api/upload  – Upload a song (full pipeline)`);
+});
 
 module.exports = app;
