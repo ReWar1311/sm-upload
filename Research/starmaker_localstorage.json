@@ -1,0 +1,47 @@
+[
+  {
+    "key": "h5_device",
+    "value": "e45f373d1f91dc42c371bd42feb95fed",
+    "type": "Local"
+  },
+  {
+    "key": "SM_H5_DEVICE2",
+    "value": "6aa414e7fea1a383f07c24333f290ba2",
+    "type": "Local"
+  },
+  {
+    "key": "@firebase/performance/configexpire",
+    "value": "1771493794421",
+    "type": "Local"
+  },
+  {
+    "key": "_gcl_ls",
+    "value": "{\"schema\":\"gcl\",\"version\":1,\"gcl_ctr\":{\"value\":{\"value\":0,\"timeouts\":0,\"creationTimeMs\":1769955198951},\"expires\":1777731198951}}",
+    "type": "Local"
+  },
+  {
+    "key": "@firebase/performance/config",
+    "value": "{\"entries\":{\"fpr_disabled_android_versions\":\"\",\"fpr_disabled_ios_versions\":\"\",\"fpr_disabled_web_versions\":\"\",\"fpr_enabled\":\"true\",\"fpr_experiment_app_start_ttid\":\"true\",\"fpr_log_endpoint_url\":\"https://firebaselogging.googleapis.com/v0cc/log?format=json_proto\",\"fpr_log_source\":\"462\",\"fpr_log_transport_android_percent\":\"100.0\",\"fpr_log_transport_ios_percent\":\"100.0\",\"fpr_log_transport_key\":\"AIzaSyCx80ru6-RXeTi3GvqkFsMVyMf-vpgIoVw\",\"fpr_rl_network_request_event_count_bg\":\"70\",\"fpr_rl_network_request_event_count_fg\":\"700\",\"fpr_rl_time_limit_sec\":\"600\",\"fpr_rl_trace_event_count_bg\":\"30\",\"fpr_rl_trace_event_count_fg\":\"300\",\"fpr_session_gauge_cpu_capture_frequency_bg_ms\":\"0\",\"fpr_session_gauge_cpu_capture_frequency_fg_ms\":\"100\",\"fpr_session_gauge_memory_capture_frequency_bg_ms\":\"0\",\"fpr_session_gauge_memory_capture_frequency_fg_ms\":\"100\",\"fpr_session_max_length_min\":\"240\",\"fpr_vc_fragment_sampling_rate\":\"0.1\",\"fpr_vc_network_request_sampling_rate\":\"0.01086349714715618\",\"fpr_vc_session_sampling_rate\":\"0.25\",\"fpr_vc_trace_sampling_rate\":\"1.0\"},\"state\":\"UPDATE\",\"templateVersion\":\"2485\"}",
+    "type": "Local"
+  },
+  {
+    "key": "SM_H5_DEVICE2_EXPIRE",
+    "value": "1775139198632",
+    "type": "Local"
+  },
+  {
+    "key": "persist:root",
+    "value": "{\"login\":\"{\\\"user\\\":{\\\"user_id\\\":\\\"10696049130629862\\\",\\\"user_name\\\":\\\"ReWaR\\\",\\\"oauth_token\\\":\\\"boNEi7Gxc72wSGLfosuNcrjEQorx2TQB\\\",\\\"avatar\\\":\\\"https://improxy.starmakerstudios.com/tools/im/200/production/users/10696049130629862/profile.jpg?ts=1771206616\\\"}}\",\"_persist\":\"{\\\"version\\\":-1,\\\"rehydrated\\\":true}\"}",
+    "type": "Local"
+  },
+  {
+    "key": "SM_H5_UUID",
+    "value": "ef3b4ede-6c79-44c5-8b3d-8610281e16f4",
+    "type": "Local"
+  },
+  {
+    "key": "_cltk",
+    "value": "10hwmqg",
+    "type": "Session"
+  }
+]

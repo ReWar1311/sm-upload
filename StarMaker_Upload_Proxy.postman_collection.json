@@ -1,0 +1,216 @@
+{
+  "info": {
+    "name": "StarMaker Upload Proxy",
+    "description": "Two endpoints for the StarMaker song upload pipeline.\n\n1. **Login** – get oauth_token & user_id\n2. **Upload Song** – full pipeline (track → thumbnail → lyrics → final submit)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "oauth_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "user_id",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const res = pm.response.json();",
+              "",
+              "pm.test('Login successful', function () {",
+              "    pm.expect(res.success).to.be.true;",
+              "    pm.expect(res.data.oauth_token).to.be.a('string');",
+              "    pm.expect(res.data.user_id).to.be.a('string');",
+              "});",
+              "",
+              "if (res.success) {",
+              "    pm.collectionVariables.set('oauth_token', res.data.oauth_token);",
+              "    pm.collectionVariables.set('user_id', res.data.user_id);",
+              "    console.log('Saved oauth_token & user_id to collection variables');",
+              "}"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"your_email@example.com\",\n  \"password\": \"YourPassword\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{base_url}}/api/login",
+          "host": ["{{base_url}}"],
+          "path": ["api", "login"]
+        },
+        "description": "Proxy login to StarMaker.\n\nOn success, `oauth_token` and `user_id` are automatically saved to collection variables for use in the Upload request."
+      },
+      "response": [
+        {
+          "name": "Success",
+          "status": "OK",
+          "code": 200,
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
+          "body": "{\n  \"success\": true,\n  \"data\": {\n    \"user_id\": \"10696049130629862\",\n    \"oauth_token\": \"boNEi7Gxc72wSGLfosuNcrjEQorx2TQB\",\n    \"stage_name\": \"ReWaR\",\n    \"profile_image\": \"https://improxy.starmakerstudios.com/...\"\n  }\n}"
+        }
+      ]
+    },
+    {
+      "name": "2. Upload Song",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "track",
+              "type": "file",
+              "src": "",
+              "description": "(Required) MP3 instrumental file"
+            },
+            {
+              "key": "thumbnail",
+              "type": "file",
+              "src": "",
+              "description": "(Required) JPG/PNG cover image"
+            },
+            {
+              "key": "lyrics",
+              "type": "file",
+              "src": "",
+              "description": "(Optional) LRC lyrics file",
+              "disabled": true
+            },
+            {
+              "key": "oauth_token",
+              "value": "{{oauth_token}}",
+              "type": "text",
+              "description": "(Required) From login response"
+            },
+            {
+              "key": "user_id",
+              "value": "{{user_id}}",
+              "type": "text",
+              "description": "(Required) From login response"
+            },
+            {
+              "key": "artist_name",
+              "value": "ReWar",
+              "type": "text",
+              "description": "(Required) Artist name"
+            },
+            {
+              "key": "song_name",
+              "value": "My Song",
+              "type": "text",
+              "description": "(Required) Song title"
+            },
+            {
+              "key": "album_name",
+              "value": "",
+              "type": "text",
+              "description": "(Optional) Album name",
+              "disabled": true
+            },
+            {
+              "key": "tags",
+              "value": "tag1,tag2",
+              "type": "text",
+              "description": "(Optional) Comma-separated tags"
+            },
+            {
+              "key": "language",
+              "value": "en",
+              "type": "text",
+              "description": "(Optional) Language code, default: en"
+            },
+            {
+              "key": "email",
+              "value": "",
+              "type": "text",
+              "description": "(Optional) Contact email",
+              "disabled": true
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/api/upload",
+          "host": ["{{base_url}}"],
+          "path": ["api", "upload"]
+        },
+        "description": "Full upload pipeline:\n1. Upload Track (instrumental MP3)\n2. Upload Thumbnail (cover image)\n3. Upload Lyrics (optional LRC file)\n4. Final Submit (song metadata + all URLs)\n\n`oauth_token` and `user_id` are auto-filled from the Login request."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const res = pm.response.json();",
+              "",
+              "pm.test('Upload successful', function () {",
+              "    pm.expect(res.success).to.be.true;",
+              "    pm.expect(res.message).to.equal('Song uploaded successfully!');",
+              "});",
+              "",
+              "pm.test('All URLs returned', function () {",
+              "    pm.expect(res.data.instrumental_url).to.be.a('string');",
+              "    pm.expect(res.data.cover_img_url).to.be.a('string');",
+              "});"
+            ]
+          }
+        }
+      ],
+      "response": [
+        {
+          "name": "Success",
+          "status": "OK",
+          "code": 200,
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
+          "body": "{\n  \"success\": true,\n  \"message\": \"Song uploaded successfully!\",\n  \"data\": {\n    \"instrumental_url\": \"http://starmaker-sg-.../instrumental.xxx.mp3\",\n    \"cover_img_url\": \"http://starmaker-sg-.../song_cover.xxx.jpg\",\n    \"lyric_url\": \"http://starmaker-sg-.../lyric.xxx.lrc\",\n    \"starmaker_response\": { \"code\": 0, \"msg\": \"Upload success\", \"data\": null }\n  }\n}"
+        },
+        {
+          "name": "Validation Error",
+          "status": "Bad Request",
+          "code": 400,
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
+          "body": "{\n  \"success\": false,\n  \"error\": \"Missing required fields: oauth_token, track (file)\"\n}"
+        },
+        {
+          "name": "Pipeline Step Error",
+          "status": "Bad Gateway",
+          "code": 502,
+          "header": [{ "key": "Content-Type", "value": "application/json" }],
+          "body": "{\n  \"success\": false,\n  \"step\": \"upload_track\",\n  \"error\": \"Upload instrumental failed (HTTP 401): Unauthorized\"\n}"
+        }
+      ]
+    }
+  ]
+}
