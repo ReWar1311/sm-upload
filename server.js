@@ -14,6 +14,13 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// ---------------------------------------------------------------------------
+// GET /health – Health check
+// ---------------------------------------------------------------------------
+app.get("/health", (_req, res) => {
+  res.json({ status: "ok", uptime: process.uptime() });
+});
+
 // Multer – accept track (mp3), thumbnail (image), lyrics (lrc) in memory
 const upload = multer({
   storage: multer.memoryStorage(),
