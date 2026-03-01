@@ -206,6 +206,7 @@ app.post("/api/login", async (req, res) => {
     }
 
     const data = await response.json();
+    console.log("Login response:", data);
 
     // Extract the fields the client will need for uploads
     return res.json({
