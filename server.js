@@ -3,7 +3,7 @@ const multer = require("multer");
 const FormData = require("form-data");
 const fetch = require("node-fetch");
 const path = require("path");
-const { v4: uuidv4 } = require("uuid");
+const crypto = require("crypto");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -60,8 +60,8 @@ const COMMON_HEADERS = {
  * @returns {string}
  */
 function buildCookieString(auth, phpsessid) {
-  const h5Device = uuidv4();
-  const h5Uuid = uuidv4();
+  const h5Device = crypto.randomUUID();
+  const h5Uuid = crypto.randomUUID();
   let cookie =
     `h5_device=${h5Device}; h5_uuid=${h5Uuid}; ` +
     `oauth_token=${auth.oauth_token}; user_id=${auth.user_id}`;
